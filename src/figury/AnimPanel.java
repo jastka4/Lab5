@@ -7,8 +7,7 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 
 public class AnimPanel extends JPanel implements ActionListener {
     /**
@@ -31,8 +30,8 @@ public class AnimPanel extends JPanel implements ActionListener {
 
     public AnimPanel() {
         super();
-        setBackground(Color.WHITE);
         timer = new Timer(delay, this);
+        setOpaque(false);
     }
 
     public void initialize() {
@@ -41,6 +40,7 @@ public class AnimPanel extends JPanel implements ActionListener {
 
         image = createImage(width, height);
         buffer = (Graphics2D) image.getGraphics();
+        buffer.setBackground(Color.WHITE);
         buffer.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         device = (Graphics2D) getGraphics();
         device.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
