@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.Random;
+import java.awt.geom.Rectangle2D;
 
 /**
  * @author tb
@@ -52,9 +53,6 @@ public abstract class Figura implements Runnable, ActionListener {
         an = 0.1 * rand.nextDouble();
 
         clr = new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
-        // reszta musi być zawarta w realizacji klasy Figure
-        // (tworzenie figury i przygotowanie transformacji)
-
     }
 
     @Override
