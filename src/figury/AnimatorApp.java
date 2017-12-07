@@ -6,8 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 
 public class AnimatorApp extends JFrame {
 
@@ -15,7 +14,7 @@ public class AnimatorApp extends JFrame {
      *
      */
     private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
+    private JPanel mainPanel;
 
     /**
      * Launch the application.
@@ -42,14 +41,12 @@ public class AnimatorApp extends JFrame {
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         int ww = 450, wh = 300;
         setBounds((screen.width-ww)/2, (screen.height-wh)/2, ww, wh);
-        contentPane = new JPanel();
-        contentPane.setBackground(Color.WHITE);
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        mainPanel = new JPanel();
+        setContentPane(mainPanel);
+        setLayout(new BorderLayout());
 
         AnimPanel kanwa = new AnimPanel();
-        kanwa.setBounds(10, 11, 422, 219);
-        contentPane.add(kanwa);
+        mainPanel.add(kanwa, BorderLayout.CENTER);
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -64,8 +61,10 @@ public class AnimatorApp extends JFrame {
                 kanwa.addFig();
             }
         });
-        btnAdd.setBounds(10, 239, 80, 23);
-        contentPane.add(btnAdd);
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel.add(btnAdd);
 
         JButton btnAnimate = new JButton("Animate");
         btnAnimate.addActionListener(new ActionListener() {
@@ -74,9 +73,16 @@ public class AnimatorApp extends JFrame {
             }
         });
 
-        btnAnimate.setBounds(100, 239, 80, 23);
-        contentPane.add(btnAnimate);
+        bottomPanel.add(btnAnimate);
+        add(bottomPanel, BorderLayout.SOUTH);
 
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                kanwa.changeSize();
+            }
+        });
     }
 
 }

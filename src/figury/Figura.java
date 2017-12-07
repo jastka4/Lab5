@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.Random;
-import java.awt.geom.Rectangle2D;
 
 /**
  * @author tb
@@ -38,6 +37,7 @@ public abstract class Figura implements Runnable, ActionListener {
     private int width;
     private int height;
     private Color clr;
+    private static boolean animationIsRunning = false;
 
     protected static final Random rand = new Random();
 
@@ -98,6 +98,10 @@ public abstract class Figura implements Runnable, ActionListener {
         area.transform(aft);
         return area;
     }
+    /*
+    public static void changeAnimationState(){
+        animationIsRunning = !animationIsRunning;
+    }*/
 
     @Override
     public void actionPerformed(ActionEvent evt) {
